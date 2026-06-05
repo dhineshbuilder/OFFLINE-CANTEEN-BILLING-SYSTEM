@@ -2,7 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from '../db/db';
 import { TrendingUp, ShoppingBag, Printer, CalendarDays, FileText, Bluetooth, BluetoothOff, BluetoothSearching } from 'lucide-react';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
+import type { Category, Item, Order, OrderItem } from '../types';
 import {
     connectPrinter,
     isPrinterConnected,
@@ -19,13 +20,18 @@ const toDateStr = (date: Date) => {
     return d.toISOString().split('T')[0];
 };
 
+const EMPTY_ORDERS: Order[] = [];
+const EMPTY_ORDER_ITEMS: OrderItem[] = [];
+const EMPTY_CATEGORIES: Category[] = [];
+const EMPTY_ITEMS: Item[] = [];
+
 export default function SalesDashboard() {
     const { t, i18n } = useTranslation();
     const printT = i18n.getFixedT('en');
-    const orders = useLiveQuery(() => db.orders.toArray()) || [];
-    const orderItems = useLiveQuery(() => db.orderItems.toArray()) || [];
-    const categories = useLiveQuery(() => db.categories.toArray()) || [];
-    const items = useLiveQuery(() => db.items.toArray()) || [];
+    const orders = useLiveQuery(() => db.orders.toArray()) ?? EMPTY_ORDERS;
+    const orderItems = useLiveQuery(() => db.orderItems.toArray()) ?? EMPTY_ORDER_ITEMS;
+    const categories = useLiveQuery(() => db.categories.toArray()) ?? EMPTY_CATEGORIES;
+    const items = useLiveQuery(() => db.items.toArray()) ?? EMPTY_ITEMS;
 
     const getTodayStr = () => toDateStr(new Date());
 
@@ -34,14 +40,10 @@ export default function SalesDashboard() {
     const [endDate, setEndDate] = useState(getTodayStr());
 
     // Bluetooth printer state
-    const [printerName, setPrinterName] = useState('');
+    const [printerName, setPrinterName] = useState(() => getConnectedPrinterName());
     const [isConnecting, setIsConnecting] = useState(false);
     const [isPrinting, setIsPrinting] = useState(false);
     const [printerError, setPrinterError] = useState('');
-
-    useEffect(() => {
-        setPrinterName(getConnectedPrinterName());
-    }, []);
 
     const connected = isPrinterConnected();
 

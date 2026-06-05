@@ -2,7 +2,7 @@
 
 Cateen POS is an offline-friendly canteen billing system built for fast counter sales, menu management, sales reporting, and Bluetooth thermal receipt printing.
 
-**Live deployment:** https://canteen-billing-system.vercel.app/
+**Live deployment:** Add the Vercel URL after deployment.
 
 ## Screenshots
 
@@ -128,8 +128,8 @@ src/
 ### Run Locally
 
 ```bash
-git clone https://github.com/6ixmindslabs-hue/CANTEENBILLING_SYSTEM.git
-cd CANTEENBILLING_SYSTEM
+git clone https://github.com/dhineshbuilder/OFFLINE-CANTEEN-BILLING-SYSTEM.git
+cd OFFLINE-CANTEEN-BILLING-SYSTEM
 npm install
 npm run dev
 ```
@@ -164,18 +164,20 @@ npm run preview
 
 ## Deployment
 
-The app is deployed on Vercel:
+The project is ready to import into Vercel from GitHub:
 
 ```text
-https://canteen-billing-system.vercel.app/
+https://github.com/dhineshbuilder/OFFLINE-CANTEEN-BILLING-SYSTEM
 ```
 
 Vercel settings:
 
 | Setting | Value |
 | --- | --- |
+| Install command | `npm ci` |
 | Build command | `npm run build` |
 | Output directory | `dist` |
+| Node.js | `>=20.19.0` |
 | SPA routing | `vercel.json` rewrites all routes to `index.html` |
 
 ## Printer Notes

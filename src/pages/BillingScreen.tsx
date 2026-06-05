@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../store/useStore';
 import { useLiveQuery } from 'dexie-react-hooks';
@@ -17,15 +17,10 @@ export default function BillingScreen() {
     const { cart, addToCart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart, total, selectedCategory, setSelectedCategory } = useStore();
     const printT = i18n.getFixedT('en');
 
-    const [printerName, setPrinterName] = useState<string>('');
+    const [printerName, setPrinterName] = useState<string>(() => getConnectedPrinterName());
     const [isConnecting, setIsConnecting] = useState(false);
     const [isPrinting, setIsPrinting] = useState(false);
     const [printerError, setPrinterError] = useState<string>('');
-
-    // Sync state with module-level cached connection
-    useEffect(() => {
-        setPrinterName(getConnectedPrinterName());
-    }, []);
 
     const connected = isPrinterConnected();
 

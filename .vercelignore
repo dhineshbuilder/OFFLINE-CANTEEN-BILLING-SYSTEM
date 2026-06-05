@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-ssr
+*.log
+*.local
+ts_errors*.txt
+ts_out.txt
+.env
+.vercel

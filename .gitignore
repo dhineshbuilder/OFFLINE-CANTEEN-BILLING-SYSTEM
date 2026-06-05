@@ -25,3 +25,4 @@ ts_out.txt
 *.sln
 *.sw?
 .env
+.vercel
