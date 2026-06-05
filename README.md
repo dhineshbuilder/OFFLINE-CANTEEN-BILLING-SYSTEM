@@ -2,7 +2,7 @@
 
 Cateen POS is an offline-friendly canteen billing system built for fast counter sales, menu management, sales reporting, and Bluetooth thermal receipt printing.
 
-**Live deployment:** Add the Vercel URL after deployment.
+**Live deployment:** https://offline-canteen-billing-system.vercel.app/
 
 ## Screenshots
 
